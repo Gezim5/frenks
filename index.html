@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frenks Ristorante</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      font-family: 'Roboto', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    body {
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+      animation: fadeInUp 1.5s ease forwards;
+      opacity: 0;
+      max-width: 700px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: fadeInUp 1.6s ease forwards;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #ddd;
+      animation: fadeInUp 1.8s ease forwards;
+    }
+
+    #countdown {
+      font-size: 1.5rem;
+      color: #f5f5f5;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 2s ease forwards;
+    }
+
+    .info-box {
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 2rem;
+      color: #fff;
+      font-size: 1.3rem;
+      line-height: 1.7;
+      animation: fadeInUp 2.2s ease forwards;
+      opacity: 0;
+    }
+
+    .info-box strong {
+      display: block;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .info-box .team {
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      color: #ccc;
+      border-top: 1px solid #666;
+      padding-top: 10px;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 15px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #aaa;
+      z-index: 2;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      .info-box {
+        font-size: 1.1rem;
+        padding: 18px;
+      }
+      .info-box strong {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background overlay -->
+  <div class="overlay"></div>
+
+  <!-- Content -->
+  <div class="content">
+    <h1>Willkommen bei Frenks Ristorante</h1>
+    <p>Wir bereiten etwas Besonderes vor. Das Ristorante ist noch im Aufbau.</p>
+    <div id="countdown">Lädt Countdown…</div>
+
+    <!-- Renovation Notice Text -->
+    <div class="info-box">
+      <strong>Liebe Gäste</strong>
+      Wir sind vom <b>23.06.25</b> bis voraussichtlich den <b>06.07.25</b><br />
+      wegen Renovierung geschlossen.
+      <br><br>
+      Ab dem <b>07. Juli 25</b> sind wir wie gewohnt für Sie wieder da.
+      <div class="team">Ihr Frenks Team</div>
+    </div>
+  </div>
+
+  <footer>© 2025 Frenks Ristorante</footer>
+
+  <script>
+    // Countdown logic
+    const countdownEl = document.getElementById("countdown");
+    const targetDate = new Date("2025-07-07T00:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        countdownEl.innerText = "Wir haben geöffnet!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownEl.innerText = `Eröffnung in ${days} Tagen, ${hours} Std, ${minutes} Min, ${seconds} Sek`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
